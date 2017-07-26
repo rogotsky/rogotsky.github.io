@@ -81,6 +81,7 @@ $(document).ready(function() {
     album.innerHTML = data.album_title;
     audio.setAttribute('src', 'https://files.freemusicarchive.org/' + data.track_file);
     audio.setAttribute('controls', 'controls');
+    audio.preload = 'none';
 
     parentBlock.appendChild(div);
     div.appendChild(title);
