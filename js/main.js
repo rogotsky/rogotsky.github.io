@@ -35,9 +35,6 @@ $(document).ready(function() {
         searchResult.forEach(function(item) {
           getTrackDataById( getTrackId(item) );
         });
-      },
-      error: function(e) {
-        console.log(e);
       }
     });
   }
@@ -50,9 +47,6 @@ $(document).ready(function() {
         var trackData = JSON.parse(data).dataset[0];
 
         addTrackBlock(container, trackData);
-      },
-      error: function(e) {
-        console.log(e);
       }
     });
   }
@@ -76,9 +70,9 @@ $(document).ready(function() {
     album.className = 'track-album';
     audio.className = 'track-audio';
 
-    title.innerHTML = data.track_title;
-    artist.innerHTML = data.artist_name;
-    album.innerHTML = data.album_title;
+    title.textContent = data.track_title;
+    artist.textContent = data.artist_name;
+    album.textContent = data.album_title;
     audio.setAttribute('src', 'https://files.freemusicarchive.org/' + data.track_file);
     audio.setAttribute('controls', 'controls');
     audio.preload = 'none';
