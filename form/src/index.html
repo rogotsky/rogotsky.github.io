@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <form id="sb_marketing_form" class="sb-form">
+      <label class="form-group" data-required >
+        <div class="field-label">Company</div>
+        <input type="text" name="companyName">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group" data-required>
+        <div class="field-label">First Name</div class="field-label">
+        <input type="text" name="firstName">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group" data-required>
+        <div class="field-label">Surname</div>
+        <input type="text" name="secondName">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group" data-required>
+        <div class="field-label">Email address</div>
+        <input type="email" name="email">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group" data-required>
+        <div class="field-label">Street, Nr</div>
+        <input type="text" name="street">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group">
+        <div class="field-label">Address line 2</div>
+        <input type="text" name="street2">
+      </label>
+      <label class="form-group">
+        <div class="field-label">Address line 3</div>
+        <input type="text" name="street3">
+      </label>
+      <label class="form-group" data-required>
+        <div class="field-label">Postcode</div>
+        <input type="text" name="zip">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group" data-required>
+        <div class="field-label">City</div>
+        <input type="text" name="city">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group">
+        <div class="field-label">Country</div>
+        <select name="countryCode"></select>
+      </label>
+      <label class="form-group" data-required>
+        <div class="field-label">Password</div>
+        <input type="password" name="password">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group" data-required>
+        <div class="field-label">Repeat Password</div>
+        <input type="password" name="repeatedPassword">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group captcha-label" data-required>
+        <div>
+          <span class="field-label">Captcha:</span class="field-label">
+          <div id="captcha"></div>
+        </div>
+        <input type="text" name="captcha">
+        <div class="messages"></div>
+      </label>
+      <label class="form-group" data-required>
+        <input type="checkbox" name="sb_terms">
+        <div class="field-label">I accept the <a href="#" target="_blank">T&Cs.</a></div>
+        <div class="messages"></div>
+      </label>
+      <button type="submit">Create account</button>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+  <script src="./js/common.js"></script>
+</body>
+
+</html>

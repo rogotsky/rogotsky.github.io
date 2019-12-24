@@ -1,0 +1,109 @@
+html, body {
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px 15px 0;
+}
+
+.sb-form {
+  width: 300px;
+  padding: 15px;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+}
+
+.sb-form label {
+  display: block;
+  font-size: 13px;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.sb-form label.has-error input, .sb-form label.has-error select {
+  border-color: #a94442;
+}
+
+.sb-form label.has-success input, .sb-form label.has-success select {
+  border-color: #3c763d;
+}
+
+.sb-form label input, .sb-form label select {
+  outline: none;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
+  border: 1px solid #ccc;
+  -webkit-transition: all 0.15s;
+  -o-transition: all 0.15s;
+  transition: all 0.15s;
+  padding: 3px;
+}
+
+.sb-form label input:focus, .sb-form label select:focus {
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+}
+
+.sb-form label[data-required] .field-label:after {
+  content: '*';
+  display: inline-block;
+  color: #a94442;
+}
+
+.sb-form label a {
+  text-decoration: none;
+}
+
+.sb-form label .messages {
+  color: #a94442;
+  font-size: 9px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.sb-form label input:not([type='checkbox']), .sb-form label select {
+  display: block;
+  width: 100%;
+}
+
+.sb-form label input[type='checkbox'] + div {
+  display: inline;
+}
+
+.sb-form button {
+  font-size: 13px;
+}
+
+.captcha-label > div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.captcha-label > div #captcha {
+  display: inline-block;
+  margin-left: 10px;
+  pointer-events: none;
+}
+
+.captcha-label > div #captcha canvas {
+  max-width: 100%;
+}

@@ -1,0 +1,94 @@
+html, body {
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px 15px 0;
+}
+
+.sb-form {
+  width: 300px;
+  padding: 15px;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  box-shadow: 0 3px 9px rgba($color: #000000, $alpha: 0.1);
+  label {
+    display: block;
+    font-size: 13px;
+    padding-bottom: 10px;
+    margin-bottom: 8px;
+    position: relative;
+    &.has-error {
+      input, select {
+        border-color: #a94442;
+      }
+    }
+    &.has-success {
+      input, select {
+        border-color: #3c763d;
+      }
+    }
+    input, select {
+      outline: none;
+      border-radius: 2px;
+      border: 1px solid #ccc;
+      transition: all 0.15s;
+      padding: 3px;
+      &:focus {
+        box-shadow: 0 3px 9px rgba($color: #000000, $alpha: 0.1);
+      }
+    }
+    &[data-required] {
+      .field-label:after {
+        content: '*';
+        display: inline-block;
+        color: #a94442;
+      }
+    }
+    a {
+      text-decoration: none;
+    }
+    .messages {
+      color: #a94442;
+      font-size: 9px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    input:not([type='checkbox']), select {
+      display: block;
+      width: 100%;
+    }
+    input[type='checkbox'] + div {
+      display: inline;
+    }
+  }
+
+  button {
+    font-size: 13px;
+  }
+}
+
+.captcha-label {
+  & > div {
+    display: flex;
+    align-items: center;
+
+    #captcha {
+      display: inline-block;
+      margin-left: 10px;
+      pointer-events: none;
+
+      canvas {
+        max-width: 100%;
+      }
+    }
+  }
+}
