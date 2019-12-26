@@ -31,13 +31,9 @@ var testData = {
 window.addEventListener('DOMContentLoaded', function() {
   var form = document.querySelector('#sb_marketing_form'),
       countriesSelect = form.querySelector('select[name="countryCode"]'),
-      initCaptcha = function() {
-        createCaptcha(form.querySelector('#captcha'));
-      },
-      captchaValue;
+      captcha = new Captcha(form.querySelector('#captcha'), 6);
 
       setCountries(countriesSelect, сountries);
-      initCaptcha();
 
   var constraints = {
       companyName: {
@@ -110,7 +106,7 @@ window.addEventListener('DOMContentLoaded', function() {
           message: '^Please enter captcha'
         },
         inclusion: {
-          within: [captchaValue],
+          within: [captcha.getValue()],
           message: '^Captcha is not correct'
         }
       }
@@ -135,7 +131,7 @@ window.addEventListener('DOMContentLoaded', function() {
     showErrors(inputs, errors || {});
 
     if (!errors) {
-      showSuccess(form);
+      handleResult(form);
     }
   }
 
@@ -188,13 +184,12 @@ window.addEventListener('DOMContentLoaded', function() {
     messages.appendChild(block);
   }
 
-  function showSuccess(form) {
-    console.log(getFormData(form));
-    postAjax('https://dev-api.adconsole.ch/api/ws-businessclick-creation/sb-promo', getFormData(form), function(response) {
-      console.log(response);
+  function handleResult(form) {
+    postAjax('https://dev-api.adconsole.ch/api/ws-businessclick-creation/sb-promo', getFormData(form), function() {
       form.reset();
-      initCaptcha();
-    });
+      captcha.update();
+      constraints.captcha.inclusion.within = [captcha.getValue()];
+    }, handleResponseErrors);
   }
 
   function getFormData(form) {
@@ -220,17 +215,35 @@ window.addEventListener('DOMContentLoaded', function() {
   
     selectEl.innerHTML = options;
   }
+
+  function handleResponseErrors(response) {
+    var resp = response;
+    var errors = {
+      companyExists: ['The entered company already exists.']
+    }
+
+    if (resp.message.indexOf('COMPANY_EXISTS') !== -1) {
+      showErrorsForInput(form.querySelector('input[name="companyName"]'), errors.companyExists);
+    }
+  }
   
-  function postAjax(url, data, success) {
-    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+  function postAjax(url, data, success, error) {
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'),
+        valid = true;
   
     xhr.open('POST', url);
     xhr.onreadystatechange = function() {
-        if (xhr.readyState > 3 && xhr.status == 200) { 
+      if (valid) {
+        if (xhr.readyState === 4 && xhr.status == 200) { 
           success(xhr.responseText); 
         } else {
-          alert('Something went wrong (' + xhr.status + ')');
+          if (xhr.responseText && 'error' in JSON.parse(xhr.responseText)) {
+            valid = false;
+            error(JSON.parse(xhr.responseText));
+            return null;
+          }
         }
+      }
     };
   
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -238,42 +251,49 @@ window.addEventListener('DOMContentLoaded', function() {
   
     return xhr;
   }
-  
-  function createCaptcha(element) {
-    element.innerHTML = '';
-  
-    var charsArray = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var lengthOtp = 6;
-    var captcha = [];
-  
-    for (var i = 0; i < lengthOtp; i++) {
-      var index = Math.floor(Math.random() * charsArray.length + 1);
-  
-      if (captcha.indexOf(charsArray[index]) === -1) {
-        captcha.push(charsArray[index]);
-      } else {
-        i--;
-      }
-    }
-  
-    var canv = document.createElement('canvas');
-  
-    canv.id = 'captchaCanv';
-    canv.width = 120;
-    canv.height = 40;
-  
-    var ctx = canv.getContext('2d');
-    var gradient = ctx.createLinearGradient(0, 0, canv.width, 0);
 
-    gradient.addColorStop('0', '#4A4A4A');
-    gradient.addColorStop('0.5', '#f90');
-    gradient.addColorStop('1.0', '#363a3b');
+  function Captcha(element, length) {
+    var charsArray = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        captcha = [];
+
+    this.update = function() {
+      element.innerHTML = '';
+      captcha = [];
+
+      for (var i = 0; i < length; i++) {
+        var index = Math.floor(Math.random() * charsArray.length + 1);
+        
+        if (captcha.indexOf(charsArray[index]) === -1) {
+          captcha.push(charsArray[index]);
+        } else {
+          i--;
+        }
+      }
+
+      var canv = document.createElement('canvas');
+
+      canv.id = 'captchaCanv';
+      canv.width = 120;
+      canv.height = 40;
   
-    ctx.font = '25px Georgia';
-    ctx.strokeStyle = gradient;
-    ctx.strokeText(captcha.join(''), 0, 30);
+      var ctx = canv.getContext('2d');
+      var gradient = ctx.createLinearGradient(0, 0, canv.width, 0);
   
-    captchaValue = captcha.join('');
-    element.appendChild(canv);
+      gradient.addColorStop('0', '#4A4A4A');
+      gradient.addColorStop('0.5', '#f90');
+      gradient.addColorStop('1.0', '#363a3b');
+  
+      ctx.font = '25px Georgia';
+      ctx.strokeStyle = gradient;
+      ctx.strokeText(captcha.join(''), 0, 30);
+  
+      element.appendChild(canv);
+    }
+
+    this.getValue = function() {
+      return captcha.join('');
+    }
+
+    this.update();
   }
 });
