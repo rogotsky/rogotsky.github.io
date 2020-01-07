@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Colors from '../theme/Colors';
 import placeholder from '../assets/images/fallback.jpeg';
 
 const CreativeWrapper = styled.a`
@@ -9,6 +8,8 @@ const CreativeWrapper = styled.a`
   max-width: 100%;
   text-decoration: none;
   color: #000;
+  padding: 3px;
+  background: #fff;
 `;
 
 const Image = styled.div`
@@ -61,16 +62,19 @@ const Creative = ({
   text,
   cta
 }) => {
-  console.log('das');
   return (
-    <CreativeWrapper>
+    <CreativeWrapper
+      href={link && link}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <Image>
         <img src={image || placeholder} />
       </Image>
       <Textbox>
-        <p className="title">Lorem ipsum dolor</p>
-        <p className="text">Test test test test test test test test test</p>
-        <p className="cta">Sit amet</p>
+        <p className="title">{title || 'Lorem ipsum dolor sit amet'}</p>
+        <p className="text">{text || 'Consectetur adipiscing elit, sed do eiusmod.'}</p>
+        <p className="cta">{cta || 'Tempor incididunt ut'}</p>
       </Textbox>
     </CreativeWrapper>
   )

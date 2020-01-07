@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from './components/Layout';
-import CreativePreview from "./components/CreativePreview/CreativePreview";
+import CreativeForm from './components/CreativeForm/CreativeForm';
 
 const App = () => {
   return (
     <Container>
-      <CreativePreview />
+      <CreativeForm />
     </Container>
   )
 };
