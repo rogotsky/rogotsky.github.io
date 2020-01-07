@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 import CreativePreview from '../CreativePreview/CreativePreview';
@@ -19,9 +19,18 @@ export const FormWrapper = styled.div`
 
 const CreativeForm = () => {
 
-  const getData = useCallback((values) => {
-    console.log(values);
-    grabData(console.log);
+  const [crData, setCrData] = useState({});
+
+  const getData = useCallback((value) => {
+    //Test 'https://jsonplaceholder.typicode.com/photos/1'
+    if (!!value) {
+      grabData(value, (data) => {
+        setCrData({
+          image: data.url,
+          title: data.title
+        });
+      });
+    }
   }, []);
 
   const formSubmit = useCallback((values) => {
@@ -33,6 +42,8 @@ const CreativeForm = () => {
       <Header>Create creative</Header>
       <Form
         onSubmit={formSubmit}
+        keepDirtyOnReinitialize
+        initialValues={crData}
         render={({ handleSubmit, form, values }) => (
           <Wrapper>
             <FormWrapper>
@@ -53,10 +64,27 @@ const CreativeForm = () => {
                   </Field>
                   <Button
                     type='button'
-                    onClick={() => getData(values.link)}
+                    onClick={() => {
+                      getData(values.link);
+                    }}
                   >
                     Parse
                   </Button>
+                </Row>
+                <Row>
+                  <label>Image*</label>
+                  <Field
+                    name='image'
+                    component={TextInput}
+                    type='text'
+                  >
+                    {props => (
+                      <TextInput
+                        type='text'
+                        {...props.input}
+                      />
+                    )}
+                  </Field>
                 </Row>
                 <Row>
                   <label>Title*</label>
@@ -119,11 +147,6 @@ const CreativeForm = () => {
                   </Field>
                 </Row>
                 <ButtonsGroup>
-                  <Button type='button'
-                    onClick={form.reset}
-                  >
-                    Reset
-                  </Button>
                   <Button type='submit'>Next</Button>
                 </ButtonsGroup>
                 <Row>
