@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="assets/styles/screen.css">
+</head>
+
+<body>
+  <div class="pc" style="opacity: 0;">
+    <div class="pc__container">
+      <div class="pc__menu">
+        <h4>Zukunft Bauen</h4>
+        <ul>
+          <li><a class="pc__menu--active" href="#">Start</a></li>
+          <li><a href="#">Editorial</a></li>
+          <li><a href="#">Innovative Grossprojekte</a></li>
+          <li><a href="#">Innovation ist Chefsache</a></li>
+          <li><a href="#">Ökosystem und Innovation</a></li>
+          <li><a href="#">Innovation Leader</a></li>
+        </ul>
+      </div>
+      <div class="pc__content pc__content--top">
+        <div class="pc__header">
+          <div class="pc__header-textbox">
+            <p class="pc__header-label">Themendossier</p>
+            <h1 class="pc__header-title">Zukunft Bauen</h1>
+            <p class="pc__header-subtitle">Best-of Schweizer Bau-und Immobilienbranche</p>
+          </div>
+        </div>
+      </div>
+      <div class="pc__content">
+        <div class="pc__content-inner bb bt pc-editorial">
+          <h5 class="pc__content-title">Editorial</h5>
+          <div class="pc__content-row">
+            <div class="pc__item">
+              <div class="pc__item-image square">
+                <img src="assets/img/1_Editorial.jpg" alt="">
+              </div>
+              <div class="pc__item-textbox">
+                <h2 class="pc__item-title">Immobiliensektor: Ein volkswirtschaftliches Schwergewicht rückt ins Scheinwerferlicht</h2>
+                <p class="pc__item-lead">Leitartikel von Bundesrat Guy Parmelin, Vorsteher des Eidgenössischen Departements für Wirtschaft, Bildung und Forschung.</p>
+                <a href="https://www.nzz.ch/ld.1532676" class="pc__item-btn">Weiterlesen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pc__content">
+        <div class="pc__content-inner pc-grossprojekte">
+          <h5 class="pc__content-title">Innovative Grossprojekte</h5>
+          <div class="pc__content-row">
+            <div class="pc__item pc__item--reverse">
+              <div class="pc__item-image square">
+                <img src="assets/img/4_landscape.JPG" alt="">
+              </div>
+              <div class="pc__item-textbox">
+                <div>
+                  <h2 class="pc__item-title">«Wir werden spätestens 2030 klimaneutral sein»</h2>
+                  <p class="pc__item-lead">Alexander Muhm, Mitglied der Konzernleitung der Schweizerischen Bundesbahnen und Leiter von SBB Immobilien, verwaltet eines der interessantesten Immobilienportfolios des Landes. Mit einer Vielzahl von Massnahmen bei Sanierung und Neubau macht die ...</p>
+                  <a href="https://www.nzz.ch/ld.1532681" class="pc__item-btn">Weiterlesen</a>
+                </div>
+              </div>
+            </div>
+            <div class="pc__item">
+              <div class="pc__item-image square">
+                <img src="assets/img/5_variant_b.png" alt="">
+              </div>
+              <div class="pc__item-textbox">
+                <div>
+                  <h2 class="pc__item-title">Optimale Bedingungen für Ärzte und Patienten</h2>
+                  <p class="pc__item-lead">Das Bauen von Spitälern gilt als besonders anspruchsvoll und verlangt spezifische Fachkompetenzen sowie langjährige Erfahrung. Die Steiner AG setzt mit zukunftsorientierten Lösungen neue Standards. </p>
+                  <a href="https://www.nzz.ch/ld.1532687" class="pc__item-btn">Weiterlesen</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+		const pc = window.top.document.querySelector('.pc');
+
+		(function () {
+			setTimeout(function () {
+				pc.style.opacity = '1';
+			}, 300)
+		})();
+  </script>
+  <script src="./js/common.js"></script>
+</body>
+
+</html>
